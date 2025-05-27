@@ -1,0 +1,282 @@
+<section id="basic">
+  <h2 class="category-title">Basic Treatments</h2>
+
+  <div class="treatment-card">
+    <h2>Basic Rehydrate IV Bag (500mL)</h2>
+    <p>Quick hydration with vitamins. Ideal for dehydration after travel, workouts, or heat.</p>
+    <p class="price">$99</p>
+    <button class="book-button" onclick="addToCart('Basic Rehydrate IV Bag (500mL)', 99)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Basic Rehydrate IV Bag 2.0 (1000mL)</h2>
+    <p>A full liter of hydration paired with essential vitamins for robust recovery and energy replenishment.</p>
+    <p class="price">$114</p>
+    <button class="book-button" onclick="addToCart('Basic Rehydrate IV Bag 2.0 (1000mL)', 114)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Basic Rehydrate IV Bag 3.0 (Lactated Ringer 1000mL)</h2>
+    <p>Upgrade your hydration with Lactated Ringer’s solution plus vitamins for athletic and intensive recovery.</p>
+    <p class="price">$119</p>
+    <button class="book-button" onclick="addToCart('Basic Rehydrate IV Bag 3.0 (Lactated Ringer 1000mL)', 119)">Add to Cart</button>
+  </div>
+</section>
+<script>
+  let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function updateCart() {
+    document.getElementById('cart-count').textContent = cart.length;
+
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
+      itemDiv.innerHTML = `
+        <span>${item.name} - $${item.price}</span>
+        <button style="background:none;border:none;color:red;font-weight:bold;cursor:pointer;" onclick="removeFromCart(${index})">✖</button>
+      `;
+      cartItems.appendChild(itemDiv);
+      total += item.price;
+    });
+
+    document.getElementById('cart-total').textContent = cart.length ? 'Total: $' + total.toFixed(2) : '';
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function toggleCart() {
+    const drawer = document.getElementById('cart-drawer');
+    drawer.style.right = drawer.style.right === '0px' ? '-350px' : '0px';
+  }
+
+  window.onload = updateCart;
+</script>
+<section id="standard">
+  <h2 class="category-title">Standard Treatments</h2>
+
+  <div class="treatment-card">
+    <h2>Rehydrate Plus IV Bag (500mL)</h2>
+    <p>Simple hydration plus enhanced vitamins for added recovery. Ideal for active individuals, post-travel, or intense heat exposure.</p>
+    <p class="price">$129</p>
+    <button class="book-button" onclick="addToCart('Rehydrate Plus IV Bag (500mL)', 129)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Rehydrate Plus IV Bag (1000mL)</h2>
+    <p>A full liter of hydration plus an extra boost of vitamins and minerals for deeper, longer-lasting recovery and energy support.</p>
+    <p class="price">$154</p>
+    <button class="book-button" onclick="addToCart('Rehydrate Plus IV Bag (1000mL)', 154)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Rehydrate Plus IV Bag (1000mL Lactated Ringer)</h2>
+    <p>Advanced hydration using Lactated Ringer’s solution, combined with essential vitamins for high-performance recovery and electrolyte replenishment.</p>
+    <p class="price">$164</p>
+    <button class="book-button" onclick="addToCart('Rehydrate Plus IV Bag (1000mL Lactated Ringer)', 164)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Jr Myers' Cocktail IV Bag</h2>
+    <p>A lighter version of the Myers’ Cocktail, tailored for a quick boost of hydration and essential vitamins — perfect for first-timers or a gentle recharge.</p>
+    <p class="price">$184</p>
+    <button class="book-button" onclick="addToCart('Jr Myers Cocktail IV Bag', 184)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Weight Management Support IV Bag</h2>
+    <p>Support your weight management journey with a powerful combination of MIC (lipotropic agents), carnitine, and metabolism-boosting vitamins.</p>
+    <p class="price">$204</p>
+    <button class="book-button" onclick="addToCart('Weight Management Support IV Bag', 204)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Mental Clarity IV Bag</h2>
+    <p>Sharpen your focus, memory, and cognition with our brain-boosting blend. Perfect for busy professionals, students, and anyone needing mental sharpness.</p>
+    <p class="price">$179</p>
+    <button class="book-button" onclick="addToCart('Mental Clarity IV Bag', 179)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Stress Relief IV Bag</h2>
+    <p>Relax and unwind with a formula designed to ease tension, lower stress, and promote a sense of calm — while nourishing your body with essential nutrients.</p>
+    <p class="price">$179</p>
+    <button class="book-button" onclick="addToCart('Stress Relief IV Bag', 179)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Anti-Inflammatory IV Bag</h2>
+    <p>Fight inflammation and soothe your body with our calming blend of antioxidants, vitamins, and a non-narcotic anti-inflammatory agent.</p>
+    <p class="price">$179</p>
+    <button class="book-button" onclick="addToCart('Anti-Inflammatory IV Bag', 179)">Add to Cart</button>
+  </div>
+</section>
+<section id="specialty">
+  <h2 class="category-title">Specialty Treatments</h2>
+
+  <div class="treatment-card">
+    <h2>Myers' Cocktail IV Bag</h2>
+    <p>Recharge and refresh with the original gold standard of IV therapy. Packed with essential vitamins and minerals to boost immunity, increase energy, and promote full-body wellness.</p>
+    <p class="price">$204</p>
+    <button class="book-button" onclick="addToCart('Myers Cocktail IV Bag', 204)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Mega Myers' Cocktail IV Bag</h2>
+    <p>Double the strength, double the benefits. Ultra-potent dose of vitamins and antioxidants for serious immune support, energy enhancement, and recovery.</p>
+    <p class="price">$234</p>
+    <button class="book-button" onclick="addToCart('Mega Myers Cocktail IV Bag', 234)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>"Day After Scottsdale" Hangover Recovery IV Bag</h2>
+    <p>Bounce back fast with our ultimate hangover remedy. Hydration, vitamins, anti-nausea, and headache relief all in one — so you can feel human again, fast.</p>
+    <p class="price">$204</p>
+    <button class="book-button" onclick="addToCart('Day After Scottsdale Hangover Recovery IV Bag', 204)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>"D-Book" Athletic Performance Booster IV Bag</h2>
+    <p>Fuel your body like a champion. This performance-enhancing IV delivers hydration, muscle recovery support, amino acids, and antioxidant power to maximize athletic output.</p>
+    <p class="price">$224</p>
+    <button class="book-button" onclick="addToCart('D-Book Athletic Performance Booster IV Bag', 224)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>"Diamondback" Immune System Booster IV Bag</h2>
+    <p>Sharpen your body’s natural defenses with high-dose Vitamin C, Zinc, and immunity-strengthening nutrients blended for rapid absorption.</p>
+    <p class="price">$199</p>
+    <button class="book-button" onclick="addToCart('Diamondback Immune System Booster IV Bag', 199)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>"Scottsdale 10" Beauty Boost IV Bag</h2>
+    <p>Glow from within. Our beauty drip combines hydration, biotin, glutathione, Vitamin C, and more to nourish your hair, skin, and nails at a cellular level.</p>
+    <p class="price">$229</p>
+    <button class="book-button" onclick="addToCart('Scottsdale 10 Beauty Boost IV Bag', 229)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>"Arizona Detox & Cleanse" IV Bag</h2>
+    <p>Flush out toxins and reset your system. This intensive detox IV supports liver and kidney function with potent antioxidants and essential nutrients.</p>
+    <p class="price">$289</p>
+    <button class="book-button" onclick="addToCart('Arizona Detox & Cleanse IV Bag', 289)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Stay Dripped Special IV Bag</h2>
+    <p>Our exclusive custom blend for ultimate wellness and recovery. Comprehensive hydration, energy, immunity, and rejuvenation support.</p>
+    <p class="price">$324</p>
+    <button class="book-button" onclick="addToCart('Stay Dripped Special IV Bag', 324)">Add to Cart</button>
+  </div>
+</section>
+<section id="premium">
+  <h2 class="category-title">Premium & NAD+ Treatments</h2>
+
+  <div class="treatment-card">
+    <h2>"Gold" Ultimate Recovery IV Bag</h2>
+    <p>Our top-tier recovery solution for athletes and high performers. High-dose nutrients, electrolytes, antioxidants, and amino acids to restore and recharge.</p>
+    <p class="price">$299</p>
+    <button class="book-button" onclick="addToCart('Gold Ultimate Recovery IV Bag', 299)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>"Platinum" Ultimate Hydration IV Bag</h2>
+    <p>The ultimate hydration and recovery blend. Ultra-premium vitamins, minerals, and antioxidants designed for peak physical performance and cellular regeneration.</p>
+    <p class="price">$349</p>
+    <button class="book-button" onclick="addToCart('Platinum Ultimate Hydration IV Bag', 349)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Basic NAD+ Therapy IV Drip</h2>
+    <p>Jumpstart your body's natural energy production and cell repair mechanisms. Excellent starter NAD+ treatment for beginners.</p>
+    <p class="price">$399</p>
+    <button class="book-button" onclick="addToCart('Basic NAD+ Therapy IV Drip', 399)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Fountain of Youth "Anti-Aging" NAD+ IV Drip</h2>
+    <p>Unlock vitality with an NAD+-infused drip designed for anti-aging, longevity, energy, and cognitive boost.</p>
+    <p class="price">$429</p>
+    <button class="book-button" onclick="addToCart('Fountain of Youth NAD+ IV Drip', 429)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Platinum NAD+ Therapy IV Drip</h2>
+    <p>Higher intensity NAD+ therapy for deep cellular rejuvenation, enhanced mental clarity, energy, and recovery support.</p>
+    <p class="price">$424</p>
+    <button class="book-button" onclick="addToCart('Platinum NAD+ Therapy IV Drip', 424)">Add to Cart</button>
+  </div>
+
+  <div class="treatment-card">
+    <h2>Diamond NAD+ Therapy IV Drip</h2>
+    <p>The elite NAD+ experience. Maximum dosing protocol for transformational wellness, elite performance, and extended healthspan.</p>
+    <p class="price">$499</p>
+    <button class="book-button" onclick="addToCart('Diamond NAD+ Therapy IV Drip', 499)">Add to Cart</button>
+  </div>
+</section>
+<!-- Cart Drawer Functionality -->
+<script>
+  let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function updateCart() {
+    document.getElementById('cart-count').textContent = cart.length;
+
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+
+    let total = 0;
+    cart.forEach((item, index) => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
+      itemDiv.innerHTML = `
+        <span>${item.name} - $${item.price}</span>
+        <button style="background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px;" onclick="removeFromCart(${index})">✖</button>
+      `;
+      cartItems.appendChild(itemDiv);
+      total += item.price;
+    });
+
+    document.getElementById('cart-total').textContent = cart.length ? 'Total: $' + total.toFixed(2) : '';
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function toggleCart() {
+    const drawer = document.getElementById('cart-drawer');
+    drawer.style.right = drawer.style.right === '0px' ? '-350px' : '0px';
+  }
+
+  window.onload = updateCart;
+</script>
+<div id="cart-icon" onclick="toggleCart()">🛒 (<span id="cart-count">0</span>)</div>
+
+<div id="cart-drawer">
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div>
+  <a class="checkout-button" href="https://staydrippediv.intakeq.com/booking" target="_blank">Proceed to Booking</a>
+</div>

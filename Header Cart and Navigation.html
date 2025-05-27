@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stay Dripped IV - Mobile IV Therapy Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stay Dripped IV offers premium hydration, recovery, beauty, detox, and wellness IV therapy treatments. Book mobile IV services online now.">
+  <link rel="icon" href="https://staydrippediv.com/wp-content/uploads/2024/05/Stay-Dripped-IV-Logo.png" type="image/png">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #2C3E50;
+    }
+    header {
+      text-align: center;
+      background: #ffffff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    header img {
+      max-width: 220px;
+      cursor: pointer;
+    }
+    nav {
+      text-align: center;
+      margin: 20px;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0072ff;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #00c6ff;
+    }
+    .category-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 40px;
+      color: #2C3E50;
+    }
+    .treatment-card {
+      background: #ffffff;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 700px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .treatment-card h2 {
+      color: #3498db;
+      font-size: 1.6rem;
+    }
+    .treatment-card p {
+      font-size: 1rem;
+      margin: 10px 0;
+    }
+    .price {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #27ae60;
+      margin: 10px 0;
+    }
+    .book-button {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .book-button:hover {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+    }
+    #cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #0072ff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    #cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -350px;
+      width: 300px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.3);
+      padding: 20px;
+      overflow-y: auto;
+      transition: right 0.3s;
+      z-index: 9999;
+    }
+    .checkout-button {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      padding: 12px;
+      width: 100%;
+      border-radius: 30px;
+      font-size: 1rem;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+    .checkout-button:hover {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+    }
+  </style>
+</head>
+
+<body>
+
+<header onclick="window.location.href='index.html'">
+  <img src="https://staydrippediv.com/wp-content/uploads/2024/05/Stay-Dripped-IV-Logo.png" alt="Stay Dripped IV Logo">
+</header>
+
+<nav>
+  <a href="#basic">Basic Treatments</a>
+  <a href="#standard">Standard Treatments</a>
+  <a href="#specialty">Specialty Treatments</a>
+  <a href="#premium">Premium & NAD+ Treatments</a>
+</nav>
+
+<div id="cart-icon" onclick="toggleCart()">🛒 (<span id="cart-count">0</span>)</div>
+
+<div id="cart-drawer">
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <div id="cart-total" style="margin-top:10px; font-weight:bold;"></div>
+  <a class="checkout-button" href="https://Staydrippediv.intakeq.com/booking" target="_blank">Proceed to Booking</a>
+</div>
+
+<main>

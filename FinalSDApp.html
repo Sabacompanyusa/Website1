@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Dripped Mobile IV - Scottsdale, AZ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            height: 800px;
+            background: #f9fafb;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 0 0 24px 24px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px;
+            border-radius: 12px;
+            margin-right: 12px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo p {
+            font-size: 14px;
+            color: rgba(219, 234, 254, 1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .notification-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .location-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .location-info {
+            flex: 1;
+            margin-left: 8px;
+        }
+
+        .location-info p:first-child {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .location-info p:last-child {
+            font-size: 12px;
+            color: rgba(219, 234, 254, 1);
+        }
+
+        .loyalty-bar {
+            background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+            color: #1f2937;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .loyalty-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .loyalty-details {
+            margin-left: 8px;
+        }
+
+        .loyalty-details p:first-child {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .loyalty-details p:last-child {
+            font-size: 12px;
+        }
+
+        .loyalty-reward {
+            text-align: right;
+        }
+
+        .loyalty-reward p:first-child {
+            font-size: 12px;
+        }
+
+        .loyalty-reward p:last-child {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 12px 12px 40px;
+            font-size: 14px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        .filter-btn {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: #dbeafe;
+            border: none;
+            padding: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .active-booking {
+            background: rgba(34, 197, 94, 0.9);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            position: relative;
+        }
+
+        .active-booking-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: rgba(220, 252, 231, 1);
+            cursor: pointer;
+        }
+
+        .active-booking-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #86efac;
+            border-radius: 50%;
+            margin-right: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+
+        .active-booking-info p:first-child {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .active-booking-info p:last-child {
+            font-size: 12px;
+            color: rgba(220, 252, 231, 1);
+        }
+
+        .track-btn {
+            margin-left: auto;
+            background: white;
+            color: #059669;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .quick-action-btn {
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-action-btn:first-child {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+
+        .quick-action-btn:last-child {
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .treatment-card {
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .treatment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .treatment-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .treatment-title h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 12px;
+        }
+
+        .treatment-duration {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+            margin-left: 36px;
+        }
+
+        .treatment-duration span {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-left: 4px;
+        }
+
+        .treatment-pricing {
+            text-align: right;
+        }
+
+        .treatment-pricing .original-price {
+            font-size: 14px;
+            opacity: 0.75;
+            text-decoration: line-through;
+            margin-right: 8px;
+        }
+
+        .treatment-pricing .current-price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .treatment-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .treatment-rating span {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+
+        .treatment-description {
+            opacity: 0.9;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .treatment-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .treatment-tags {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .treatment-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .popularity {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Nurse Cards */
+        .nurse-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f3f4f6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .nurse-avatar {
+            width: 48px;
+            height: 48px;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #2563eb;
+        }
+
+        .nurse-info {
+            flex: 1;
+        }
+
+        .nurse-info h3 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .nurse-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .nurse-rating span {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+
+        .nurse-badges {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .nurse-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 16px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #2563eb;
+        }
+
+        .nav-item:not(.active) {
+            color: #9ca3af;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* Service Detail */
+        .detail-header {
+            background: white;
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+
+        .detail-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .service-hero {
+            border-radius: 12px;
+            padding: 24px;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .service-hero-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .service-hero h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .service-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .price-info .original-price {
+            font-size: 16px;
+            opacity: 0.75;
+            text-decoration: line-through;
+            margin-right: 8px;
+        }
+
+        .price-info .current-price {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .duration-info {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .duration-info span {
+            margin-left: 8px;
+        }
+
+        .rating-info {
+            text-align: right;
+        }
+
+        .rating-display {
+            display: flex;
+            align-items: center;
+        }
+
+        .rating-display span {
+            margin-left: 4px;
+        }
+
+        .popularity-info {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .content-section {
+            margin-bottom: 24px;
+        }
+
+        .content-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f3f4f6;
+        }
+
+        .ingredient-item, .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .ingredient-item:last-child, .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            color: #10b981;
+            margin-right: 8px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .ingredient-item p, .benefit-item p {
+            font-size: 14px;
+        }
+
+        .benefit-item p {
+            font-weight: 500;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .condition-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .book-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .app-container {
+                max-width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+        }
+
+        /* Color Classes */
+        .bg-blue { background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%); }
+        .bg-pink { background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%); }
+        .bg-purple { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); }
+        .bg-yellow { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
+        .bg-green { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .bg-orange { background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%); }
+
+        /* Hidden by default */
+        .hidden { display: none; }
+
+        /* Map styles */
+        .map-container {
+            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-content {
+            position: relative;
+            background: linear-gradient(135deg, #dbeafe 0%, transparent 50%, #e0e7ff 100%);
+            opacity: 0.3;
+        }
+
+        .map-visualization {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map-area {
+            width: 80%;
+            height: 80%;
+            border: 2px solid #93c5fd;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            position: relative;
+        }
+
+        .map-road {
+            position: absolute;
+            background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .road-horizontal {
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .road-vertical-1 {
+            top: 0;
+            bottom: 0;
+            left: 33%;
+            width: 4px;
+        }
+
+        .road-vertical-2 {
+            top: 0;
+            bottom: 0;
+            right: 25%;
+            width: 4px;
+        }
+
+        .user-location {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .user-dot {
+            width: 24px;
+            height: 24px;
+            background: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .user-inner {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .service-area {
+            position: absolute;
+            width: 80px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-controls {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .map-control-btn {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .map-control-btn:hover {
+            background: #f9fafb;
+        }
+
+        .loading-spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e5e7eb;
+            border-top: 2px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Home Screen -->
+        <div id="home" class="screen active">
+            <div class="header">
+                <div class="header-top">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <div>
+                            <h1>Stay Dripped</h1>
+                            <p>Premium Mobile IV Therapy</p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="notification-btn" onclick="toggleNotifications()">
+                            <i data-lucide="bell"></i>
+                            <div class="notification-badge">2</div>
+                        </button>
+                        <button class="profile-btn" onclick="showScreen('profile')">
+                            <i data-lucide="user"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="location-bar">
+                    <i data-lucide="map-pin"></i>
+                    <div class="location-info">
+                        <p>Current Location</p>
+                        <p>Scottsdale, AZ • Premium Service Zone</p>
+                    </div>
+                    <i data-lucide="chevron-right"></i>
+                </div>
+                
+                <div class="loyalty-bar">
+                    <div class="loyalty-info">
+                        <i data-lucide="award"></i>
+                        <div class="loyalty-details">
+                            <p>Gold Member</p>
+                            <p>450 points • 50 to Platinum</p>
+                        </div>
+                    </div>
+                    <div class="loyalty-reward">
+                        <p>Next reward</p>
+                        <p>Free Add-on</p>
+                    </div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search treatments, symptoms, or benefits...">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <button class="filter-btn">
+                        <i data-lucide="filter"></i>
+                    </button>
+                </div>
+                
+                <div id="activeBooking" class="active-booking hidden">
+                    <button class="active-booking-close" onclick="hideActiveBooking()">
+                        <i data-lucide="x"></i>
+                    </button>
+                    <div class="active-booking-content">
+                        <div class="pulse-dot"></div>
+                        <div class="active-booking-info">
+                            <p>Active Appointment</p>
+                            <p>Myers Cocktail • Today, 3:00 PM</p>
+                        </div>
+                        <button class="track-btn" onclick="showScreen('tracking')">Track Live</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="showScreen('map')">
+                        <i data-lucide="map-pin"></i>
+                        <span style="margin-left: 8px;">Service Areas</span>
+                    </button>
+                    <button class="quick-action-btn" onclick="showScreen('appointments')">
+                        <i data-lucide="calendar"></i>
+                        <span style="margin-left: 8px;">My Bookings</span>
+                    </button>
+                </div>
+                
+                <h2 class="section-title">Featured IV Treatments</h2>
+                <div id="treatmentsList">
+                    <div class="treatment-card bg-blue" onclick="selectService(1)">
+                        <div class="treatment-header">
+                            <div class="treatment-title">
+                                <i data-lucide="zap"></i>
+                                <div>
+                                    <h3>Myers Cocktail</h3>
+                                    <div class="treatment-duration">
+                                        <i data-lucide="clock"></i>
+                                        <span>45 min</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="treatment-pricing">
+                                <div>
+                                    <span class="original-price">$199</span>
+                                    <span class="current-price">$169</span>
+                                </div>
+                                <div class="treatment-rating">
+                                    <i data-lucide="star"></i>
+                                    <span>4.9 (1247)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="treatment-description">Our most popular IV treatment for overall wellness and energy boost</p>
+                        <div class="treatment-footer">
+                            <div class="treatment-tags">
+                                <span class="treatment-tag">Fatigue</span>
+                                <span class="treatment-tag">Stress</span>
+                            </div>
+                            <div class="popularity">98% popular</div>
+                        </div>
+                    </div>
+                    
+                    <div class="treatment-card bg-pink" onclick="selectService(2)">
+                        <div class="treatment-header">
+                            <div class="treatment-title">
+                                <i data-lucide="zap"></i>
+                                <div>
+                                    <h3>Stress Relief Drip</h3>
+                                    <div class="treatment-duration">
+                                        <i data-lucide="clock"></i>
+                                        <span>40 min</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="treatment-pricing">
+                                <div>
+                                    <span class="original-price">$179</span>
+                                    <span class="current-price">$149</span>
+                                </div>
+                                <div class="treatment-rating">
+                                    <i data-lucide="star"></i>
+                                    <span>4.8 (892)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="treatment-description">Specially formulated to reduce stress and promote relaxation</p>
+                        <div class="treatment-footer">
+                            <div class="treatment-tags">
+                                <span class="treatment-tag">Anxiety</span>
+                                <span class="treatment-tag">Insomnia</span>
+                            </div>
+                            <div class="popularity">95% popular</div>
+                        </div>
+                    </div>
+                    
+                    <div class="treatment-card bg-purple" onclick="selectService(3)">
+                        <div class="treatment-header">
+                            <div class="treatment-title">
+                                <i data-lucide="zap"></i>
+                                <div>
+                                    <h3>Mental Clarity Drip</h3>
+                                    <div class="treatment-duration">
+                                        <i data-lucide="clock"></i>
+                                        <span>60 min</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="treatment-pricing">
+                                <div>
+                                    <span class="original-price">$219</span>
+                                    <span class="current-price">$189</span>
+                                </div>
+                                <div class="treatment-rating">
+                                    <i data-lucide="star"></i>
+                                    <span>4.9 (634)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="treatment-description">Advanced cognitive enhancement for peak mental performance</p>
+                        <div class="treatment-footer">
+                            <div class="treatment-tags">
+                                <span class="treatment-tag">Brain fog</span>
+                                <span class="treatment-tag">Focus</span>
+                            </div>
+                            <div class="popularity">92% popular</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Top Medical Professionals</h2>
+                <div id="nursesList">
+                    <div class="nurse-card" onclick="selectNurse(1)">
+                        <div class="nurse-avatar">
+                            <i data-lucide="user"></i>
+                        </div>
+                        <div class="nurse-info">
+                            <h3>Dr. Sarah Johnson, RN</h3>
+                            <div class="nurse-rating">
+                                <i data-lucide="star" style="color: #eab308;"></i>
+                                <span>4.9 (1284) • 2.3 mi</span>
+                            </div>
+                            <div class="nurse-badges">
+                                <span class="nurse-badge">Top Performer</span>
+                                <span class="nurse-badge">Expert</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" style="color: #9ca3af;"></i>
+                    </div>
+                    
+                    <div class="nurse-card" onclick="selectNurse(2)">
+                        <div class="nurse-avatar">
+                            <i data-lucide="user"></i>
+                        </div>
+                        <div class="nurse-info">
+                            <h3>Michael Chen, NP</h3>
+                            <div class="nurse-rating">
+                                <i data-lucide="star" style="color: #eab308;"></i>
+                                <span>4.8 (1103) • 3.5 mi</span>
+                            </div>
+                            <div class="nurse-badges">
+                                <span class="nurse-badge">Cognitive Specialist</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" style="color: #9ca3af;"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-nav">
+                <button class="nav-item active">
+                    <i data-lucide="map-pin"></i>
+                    <span>Explore</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('appointments')">
+                    <i data-lucide="calendar"></i>
+                    <span>Appointments</span>
+                </button>
+                <button class="nav-item">
+                    <i data-lucide="message-circle"></i>
+                    <span>Messages</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('profile')">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Service Detail Screen -->
+        <div id="serviceDetail" class="screen">
+            <div class="detail-header">
+                <button class="back-btn" onclick="showScreen('home')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="detail-title">Treatment Details</h1>
+            </div>
+            
+            <div class="main-content">
+                <div id="serviceHero" class="service-hero bg-blue">
+                    <div class="service-hero-header">
+                        <i data-lucide="zap"></i>
+                        <h2>Myers Cocktail</h2>
+                    </div>
+                    <div class="service-pricing">
+                        <div class="price-info">
+                            <span class="original-price">$199</span>
+                            <span class="current-price">$169</span>
+                            <div class="duration-info">
+                                <i data-lucide="clock"></i>
+                                <span>45 min</span>
+                            </div>
+                        </div>
+                        <div class="rating-info">
+                            <div class="rating-display">
+                                <i data-lucide="star"></i>
+                                <span>4.9 (1247)</span>
+                            </div>
+                            <div class="popularity-info">98% popular</div>
+                        </div>
+                    </div>
+                    <p>Our most popular IV treatment for overall wellness and energy boost</p>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Ingredients</h3>
+                    <div class="content-box">
+                        <div class="ingredient-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Plain Saline IV Solution - 500ml</p>
+                        </div>
+                        <div class="ingredient-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Vitamin B-12 - 1000mcg</p>
+                        </div>
+                        <div class="ingredient-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Zinc - 5mg</p>
+                        </div>
+                        <div class="ingredient-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Magnesium - 200mg</p>
+                        </div>
+                        <div class="ingredient-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Glutathione - 600mg</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Benefits</h3>
+                    <div class="content-box">
+                        <div class="benefit-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Boosts immune function by 40%</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Increases energy levels for 3-5 days</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Promotes better hydration</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i data-lucide="check" class="check-icon"></i>
+                            <p>Supports cellular health and recovery</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Best For</h3>
+                    <div class="tag-container">
+                        <span class="condition-tag">Fatigue</span>
+                        <span class="condition-tag">Stress</span>
+                        <span class="condition-tag">Immune support</span>
+                        <span class="condition-tag">General wellness</span>
+                    </div>
+                </div>
+                
+                <button class="book-btn" onclick="showScreen('booking')">Book This Treatment - $169</button>
+            </div>
+        </div>
+
+        <!-- Booking Screen -->
+        <div id="booking" class="screen">
+            <div class="detail-header">
+                <button class="back-btn" onclick="showScreen('serviceDetail')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="detail-title">Book Appointment</h1>
+            </div>
+            
+            <div class="main-content">
+                <div class="service-hero bg-blue" style="padding: 12px; margin-bottom: 24px;">
+                    <h3 style="font-weight: 500; margin-bottom: 4px;">Selected Treatment</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <p style="font-weight: bold;">Myers Cocktail</p>
+                        <span style="font-weight: 600;">$169</span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 4px;">
+                        <i data-lucide="clock" style="width: 14px; height: 14px; margin-right: 4px;"></i>
+                        <span style="font-size: 14px;">45 min</span>
+                    </div>
+                </div>
+                
+                <button class="book-btn" onclick="confirmBooking()" style="margin-top: 40px;">Confirm Booking - $189</button>
+            </div>
+        </div>
+
+        <!-- Tracking Screen -->
+        <div id="tracking" class="screen">
+            <div class="detail-header">
+                <button class="back-btn" onclick="showScreen('home')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="detail-title">Track Appointment</h1>
+            </div>
+            
+            <div style="position: relative; flex: 1;">
+                <div class="map-container" style="height: 100%;">
+                    <div class="map-content" style="width: 100%; height: 100%; position: relative;">
+                        <div class="map-visualization" style="width: 100%; height: 100%;">
+                            <div class="map-area">
+                                <div class="map-road road-horizontal"></div>
+                                <div class="map-road road-vertical-1"></div>
+                                <div class="map-road road-vertical-2"></div>
+                                
+                                <div class="user-location">
+                                    <div class="user-dot">
+                                        <div class="user-inner"></div>
+                                    </div>
+                                </div>
+                                
+                                <div style="position: absolute; top: 30%; left: 60%; transform: translate(-50%, -50%);">
+                                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #34d399 0%, #10b981 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: bounce 1s infinite; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
+                                        <i data-lucide="truck" style="color: white; width: 16px; height: 16px;"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="service-area" style="top: 20%; left: 10%;">Old Town</div>
+                                <div class="service-area" style="top: 35%; left: 45%;">Paradise</div>
+                                <div class="service-area" style="top: 50%; right: 15%;">Kierland</div>
+                                <div class="service-area" style="top: 65%; left: 25%;">Arcadia</div>
+                            </div>
+                        </div>
+                        
+                        <div class="map-controls">
+                            <button class="map-control-btn">
+                                <i data-lucide="plus"></i>
+                            </button>
+                            <button class="map-control-btn">
+                                <i data-lucide="minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 12px 12px 0 0; box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1); padding: 16px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <div style="width: 48px; height: 48px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                            <i data-lucide="user" style="color: #2563eb;"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-weight: 600;">Sarah Johnson, RN is on the way</h3>
+                            <div style="display: flex; align-items: center;">
+                                <i data-lucide="navigation" style="color: #2563eb; width: 14px; height: 14px; margin-right: 4px;"></i>
+                                <span style="font-size: 14px;">Arriving in approximately 14 minutes (2.3 miles away)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #eff6ff; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="font-weight: 500;">Myers Cocktail</h4>
+                                <p style="font-size: 14px; color: #6b7280;">Today, 3:00 PM</p>
+                            </div>
+                            <span style="font-weight: 600;">$169</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px;">
+                        <button style="flex: 1; padding: 12px; background: #dbeafe; color: #1e40af; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="message-circle" style="width: 18px; height: 18px; margin-right: 8px;"></i>
+                            Message
+                        </button>
+                        <button style="flex: 1; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="phone" style="width: 18px; height: 18px; margin-right: 8px;"></i>
+                            Call Provider
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Screen -->
+        <div id="map" class="screen">
+            <div class="detail-header">
+                <button class="back-btn" onclick="showScreen('home')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="detail-title">Service Areas</h1>
+            </div>
+            
+            <div style="flex: 1; padding: 16px;">
+                <div class="map-container" style="height: 300px; margin-bottom: 16px;">
+                    <div class="map-content" style="width: 100%; height: 100%; position: relative;">
+                        <div class="map-visualization" style="width: 100%; height: 100%;">
+                            <div class="map-area">
+                                <div class="map-road road-horizontal"></div>
+                                <div class="map-road road-vertical-1"></div>
+                                <div class="map-road road-vertical-2"></div>
+                                
+                                <div class="user-location">
+                                    <div class="user-dot">
+                                        <div class="user-inner"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="service-area" style="top: 20%; left: 10%;">Old Town</div>
+                                <div class="service-area" style="top: 32%; left: 40%;">North</div>
+                                <div class="service-area" style="top: 44%; right: 20%;">Paradise</div>
+                                <div class="service-area" style="top: 56%; left: 15%;">Arcadia</div>
+                                <div class="service-area" style="top: 68%; left: 45%;">Kierland</div>
+                                <div class="service-area" style="top: 80%; right: 15%;">McCormick</div>
+                            </div>
+                        </div>
+                        
+                        <div class="map-controls">
+                            <button class="map-control-btn">
+                                <i data-lucide="plus"></i>
+                            </button>
+                            <button class="map-control-btn">
+                                <i data-lucide="minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="font-size: 18px; font-weight: 600; margin-top: 16px; margin-bottom: 8px;">Available Areas</h3>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-weight: 500;">Old Town Scottsdale</p>
+                            <p style="color: #6b7280; font-size: 14px;">ETA: 15-25 min</p>
+                        </div>
+                        <i data-lucide="check-circle" style="color: #10b981;"></i>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-weight: 500;">North Scottsdale</p>
+                            <p style="color: #6b7280; font-size: 14px;">ETA: 20-30 min</p>
+                        </div>
+                        <i data-lucide="check-circle" style="color: #10b981;"></i>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-weight: 500;">Paradise Valley</p>
+                            <p style="color: #6b7280; font-size: 14px;">ETA: 15-30 min</p>
+                        </div>
+                        <i data-lucide="check-circle" style="color: #10b981;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments Screen -->
+        <div id="appointments" class="screen">
+            <div class="detail-header">
+                <button class="back-btn" onclick="showScreen('home')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="detail-title">My Appointments</h1>
+            </div>
+            
+            <div style="overflow-y: auto; flex: 1; padding: 16px;">
+                <div style="margin-bottom: 24px;">
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Active</h3>
+                    <div id="activeAppointment" style="background: #f9fafb; border-radius: 8px; padding: 32px; text-align: center;">
+                        <i data-lucide="calendar" style="width: 48px; height: 48px; color: #9ca3af; margin: 0 auto 12px;"></i>
+                        <p style="color: #6b7280;">No active appointments</p>
+                        <button style="margin-top: 12px; background: #2563eb; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-size: 14px; cursor: pointer;" onclick="showScreen('home')">Book Treatment</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">Upcoming</h3>
+                    <div style="background: #f9fafb; border-radius: 8px; padding: 32px; text-align: center;">
+                        <i data-lucide="calendar" style="width: 48px; height: 48px; color: #9ca3af; margin: 0 auto 12px;"></i>
+                        <p style="color: #6b7280;">No upcoming appointments</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home')">
+                    <i data-lucide="map-pin"></i>
+                    <span>Explore</span>
+                </button>
+                <button class="nav-item active">
+                    <i data-lucide="calendar"></i>
+                    <span>Appointments</span>
+                </button>
+                <button class="nav-item">
+                    <i data-lucide="message-circle"></i>
+                    <span>Messages</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('profile')">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile" class="screen">
+            <div class="detail-header">
+                <button class="back-btn" onclick="showScreen('home')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="detail-title">My Profile</h1>
+            </div>
+            
+            <div style="overflow-y: auto; flex: 1; padding: 16px;">
+                <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                        <i data-lucide="user" style="width: 36px; height: 36px; color: #2563eb;"></i>
+                    </div>
+                    <div>
+                        <h2 style="font-size: 20px; font-weight: bold;">Alex Johnson</h2>
+                        <p style="color: #6b7280;">Gold Member since 2023</p>
+                        <div style="display: flex; align-items: center; margin-top: 4px;">
+                            <i data-lucide="award" style="color: #eab308; width: 16px; height: 16px; margin-right: 4px;"></i>
+                            <span style="font-size: 14px;">450 points</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6;">
+                        <h3 style="font-weight: 600; margin-bottom: 8px;">Quick Stats</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center;">
+                            <div>
+                                <p style="font-size: 24px; font-weight: bold; color: #2563eb;">12</p>
+                                <p style="font-size: 14px; color: #6b7280;">Treatments</p>
+                            </div>
+                            <div>
+                                <p style="font-size: 24px; font-weight: bold; color: #10b981;">98%</p>
+                                <p style="font-size: 14px; color: #6b7280;">Satisfaction</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6; overflow: hidden;">
+                        <div style="padding: 16px; border-bottom: 1px solid #f3f4f6;">
+                            <h3 style="font-weight: 600;">Account Settings</h3>
+                        </div>
+                        <div style="border-bottom: 1px solid #f3f4f6; padding: 16px; display: flex; justify-content: space-between; align-items: center;">
+                            <span>Personal Information</span>
+                            <i data-lucide="chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                        <div style="border-bottom: 1px solid #f3f4f6; padding: 16px; display: flex; justify-content: space-between; align-items: center;">
+                            <span>Payment Methods</span>
+                            <i data-lucide="chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                        <div style="padding: 16px; display: flex; justify-content: space-between; align-items: center;">
+                            <span>Notifications</span>
+                            <i data-lucide="chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                    </div>
+                    
+                    <button style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-weight: 500; color: #dc2626; background: white; cursor: pointer;">Sign Out</button>
+                </div>
+            </div>
+            
+            <div class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home')">
+                    <i data-lucide="map-pin"></i>
+                    <span>Explore</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('appointments')">
+                    <i data-lucide="calendar"></i>
+                    <span>Appointments</span>
+                </button>
+                <button class="nav-item">
+                    <i data-lucide="message-circle"></i>
+                    <span>Messages</span>
+                </button>
+                <button class="nav-item active">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // App state
+        let currentScreen = 'home';
+        let selectedService = null;
+        let selectedNurse = null;
+        let showActiveBooking = false;
+
+        // IV Treatments data
+        const ivTreatments = {
+            1: {
+                id: 1,
+                name: 'Myers Cocktail',
+                price: 169,
+                originalPrice: 199,
+                duration: '45 min',
+                description: 'Our most popular IV treatment for overall wellness and energy boost',
+                color: 'bg-blue',
+                ingredients: [
+                    'Plain Saline IV Solution - 500ml',
+                    'Vitamin B-12 - 1000mcg',
+                    'Zinc - 5mg',
+                    'Magnesium - 200mg',
+                    'Glutathione - 600mg',
+                    'Vitamin C - 1000mg',
+                    'Vitamin B-Complex - 1ml'
+                ],
+                benefits: [
+                    'Boosts immune function by 40%',
+                    'Increases energy levels for 3-5 days',
+                    'Promotes better hydration',
+                    'Supports cellular health and recovery'
+                ],
+                bestFor: ['Fatigue', 'Stress', 'Immune support', 'General wellness']
+            },
+            2: {
+                id: 2,
+                name: 'Stress Relief Drip',
+                price: 149,
+                originalPrice: 179,
+                duration: '40 min',
+                description: 'Specially formulated to reduce stress and promote relaxation',
+                color: 'bg-pink',
+                ingredients: [
+                    'Plain Saline IV Solution - 500ml',
+                    'Magnesium - 400mg',
+                    'Vitamin C - 1000mg',
+                    'Vitamin B-Complex - 1ml',
+                    'Thiamine - 100mg'
+                ],
+                benefits: [
+                    'Reduces cortisol levels by 30%',
+                    'Promotes deep relaxation',
+                    'Improves sleep quality',
+                    'Supports nervous system'
+                ],
+                bestFor: ['Anxiety', 'Insomnia', 'High stress', 'Burnout']
+            },
+            3: {
+                id: 3,
+                name: 'Mental Clarity Drip',
+                price: 189,
+                originalPrice: 219,
+                duration: '60 min',
+                description: 'Advanced cognitive enhancement for peak mental performance',
+                color: 'bg-purple',
+                ingredients: [
+                    'Plain Saline IV Solution - 500ml',
+                    'Magnesium Chloride - 300mg',
+                    'Thiamine HCL - 100mg',
+                    'Amino Blend - 10ml',
+                    'Vitamin B-12 - 1500mcg',
+                    'Glutathione - 800mg'
+                ],
+                benefits: [
+                    'Improves focus by 60%',
+                    'Enhances memory recall',
+                    'Reduces brain fog',
+                    'Increases mental clarity'
+                ],
+                bestFor: ['Brain fog', 'Focus issues', 'Mental fatigue', 'Productivity']
+            }
+        };
+
+        // Screen management
+        function showScreen(screenName) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show selected screen
+            document.getElementById(screenName).classList.add('active');
+            currentScreen = screenName;
+            
+            // Update navigation
+            updateNavigation();
+            
+            // Reinitialize icons
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        }
+
+        function updateNavigation() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        function selectService(serviceId) {
+            selectedService = ivTreatments[serviceId];
+            updateServiceDetail();
+            showScreen('serviceDetail');
+        }
+
+        function selectNurse(nurseId) {
+            // Nurse selection logic here
+            showScreen('nurseDetail');
+        }
+
+        function updateServiceDetail() {
+            if (!selectedService) return;
+            
+            const hero = document.getElementById('serviceHero');
+            hero.className = `service-hero ${selectedService.color}`;
+            hero.querySelector('h2').textContent = selectedService.name;
+            hero.querySelector('.original-price').textContent = `$${selectedService.originalPrice}`;
+            hero.querySelector('.current-price').textContent = `$${selectedService.price}`;
+            hero.querySelector('.duration-info span').textContent = selectedService.duration;
+            hero.querySelector('p').textContent = selectedService.description;
+        }
+
+        function confirmBooking() {
+            showActiveBooking = true;
+            document.getElementById('activeBooking').classList.remove('hidden');
+            document.getElementById('activeAppointment').innerHTML = `
+                <div style="background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <h3 style="font-weight: 600;">Myers Cocktail</h3>
+                            <div style="display: flex; align-items: center; margin-top: 4px;">
+                                <i data-lucide="clock" style="color: #9ca3af; width: 14px; height: 14px; margin-right: 4px;"></i>
+                                <span style="font-size: 14px; color: #6b7280;">Today, 3:00 PM</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-top: 4px;">
+                                <i data-lucide="user" style="color: #9ca3af; width: 14px; height: 14px; margin-right: 4px;"></i>
+                                <span style="font-size: 14px; color: #6b7280;">Dr. Sarah Johnson, RN</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                            <span style="font-weight: 500;">$169</span>
+                            <button style="margin-top: 8px; color: #2563eb; font-size: 14px; font-weight: 500; background: #eff6ff; padding: 4px 12px; border-radius: 8px; border: none; cursor: pointer;" onclick="showScreen('tracking')">Track</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showScreen('home');
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        }
+
+        function hideActiveBooking() {
+            showActiveBooking = false;
+            document.getElementById('activeBooking').classList.add('hidden');
+            document.getElementById('activeAppointment').innerHTML = `
+                <div style="background: #f9fafb; border-radius: 8px; padding: 32px; text-align: center;">
+                    <i data-lucide="calendar" style="width: 48px; height: 48px; color: #9ca3af; margin: 0 auto 12px;"></i>
+                    <p style="color: #6b7280;">No active appointments</p>
+                    <button style="margin-top: 12px; background: #2563eb; color: white; padding: 8px 16px; border-radius: 8px; border: none; font-size: 14px; cursor: pointer;" onclick="showScreen('home')">Book Treatment</button>
+                </div>
+            `;
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        }
+
+        function toggleNotifications() {
+            // Notification toggle logic here
+        }
+
+        // Animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 53%, 80%, 100% {
+                    transform: translate(-50%, -50%) translateY(0);
+                }
+                40%, 43% {
+                    transform: translate(-50%, -50%) translateY(-8px);
+                }
+                70% {
+                    transform: translate(-50%, -50%) translateY(-4px);
+                }
+                90% {
+                    transform: translate(-50%, -50%) translateY(-2px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        setTimeout(() => {
+            lucide.createIcons();
+        }, 100);
+    </script>
+</body>
+</html>
